@@ -1,6 +1,21 @@
 const mongoose = require("mongoose");
 
-const videoSchema = mongoose.Schema({
+const sourceSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        enum: ["Netflix", "Hulu", "Prime", "Apple", "Disney", "Peacock", "Crunchyroll"]
+    },
+    link: {
+        type: String,
+        required: true
+    },
+    cost: {
+        type: Number,
+        default: 0
+    }
+})
+
+const videoSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -8,6 +23,14 @@ const videoSchema = mongoose.Schema({
     thumbnail: {
         type: String,
         required: true
+    },
+    fullSizeImage: {
+        type: String,
+        required: false
+    },
+    trailer: {
+        type: String,
+        required: false
     },
     releaseDate: {
         type: Date,
@@ -18,32 +41,11 @@ const videoSchema = mongoose.Schema({
         enum: ["Movie", "Show", "Anime"],
         required: true
     },
-    onNetflix: {
-        type: Boolean,
-        default: false
-    },
-    netflixLink: {
-        type: String,
-        required: false
-    },
-    onHulu: {
-        type: Boolean,
-        default: false
-    },
-    huluLink: {
-        type: String,
-        required: false
-    },
-    onPrime: {
-        type: Boolean,
-        default: false
-    },
-    primeLink: {
-        type: String,
-        required: false
-    }
-},
-   {timestamps: true}
-);
+    sources: [{
+        type: sourceSchema
+    }]
+});
 
-module.exports = mongoose.model("Video", videoSchema);
+const videoModel = mongoose.model("Video", videoSchema);
+
+module.exports = videoModel;
