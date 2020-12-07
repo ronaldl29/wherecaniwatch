@@ -9,7 +9,7 @@ app.use(express.static("public"));
 // @access   Private
 app.get('/', async (req, res) => {
     try {
-        res.render("index");
+        res.render("index", {title: "Where Can I Watch"});
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
