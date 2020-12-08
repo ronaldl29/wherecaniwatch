@@ -30,6 +30,56 @@ app.get('/', async (req, res) => {
     }
 });
 
+// @route    GET /content/movies
+// @desc     Get movies
+// @access   Public
+app.get('/content/movies', async (req, res) => {
+  try {
+    const movies = await Video.find({
+      category: "Movie"
+    }).populate("sources");
+
+    res.render("movies", {title: "Where Can I Watch Movies", movies});
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route    GET /content/shows
+// @desc     Get shows
+// @access   Public
+app.get('/content/shows', async (req, res) => {
+  try {
+    const shows = await Video.find({
+      category: "Show"
+    }).populate("sources");
+
+    res.render("shows", {title: "Where Can I Watch Shows", shows});
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route    GET /content/animes
+// @desc     Get animes
+// @access   Public
+app.get('/content/animes', async (req, res) => {
+  try {
+    const animes = await Video.find({
+      category: "Anime"
+    }).populate("sources");
+
+    res.render("animes", {title: "Where Can I Watch Anime", animes});
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+
 // @route    GET /create
 // @desc     Get create video page
 // @access   Public
@@ -52,6 +102,7 @@ app.post('/create', async (req, res) => {
         title: req.body.title,
         thumbnail: req.body.thumbnail,
         category: req.body.category,
+        description: req.body.description,
         sources: [{
           name: req.body.sourceName,
           link: req.body.sourceLink

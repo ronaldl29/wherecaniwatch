@@ -1,16 +1,16 @@
 <%- include('partials/header'); %>
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Top Movies</h1>
+        <h1 class="h2">Top Animes</h1>
       </div>
       <div class="row">
-        <% movies.forEach(function(movie){ %>
+        <% animes.forEach(function(anime){ %>
           <div class="col-md-3">
             <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="<%= movie.thumbnail %>" alt="Card image cap">
+              <img class="card-img-top" src="<%= anime.thumbnail %>" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title"><%= movie.title %></h5>
-                <p class="card-text"><%= movie.description %></p>
+                <h5 class="card-title"><%= anime.title %></h5>
+                <p class="card-text"><%= anime.description %></p>
                 <a href="#" class="btn btn-primary">Places to stream</a>
               </div>
             </div>

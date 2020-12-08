@@ -28,6 +28,10 @@ const videoSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    description: {
+        type: String,
+        required: true
+    },
     trailer: {
         type: String,
         required: false
