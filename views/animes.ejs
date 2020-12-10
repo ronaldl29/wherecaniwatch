@@ -5,13 +5,13 @@
       </div>
       <div class="row">
         <% animes.forEach(function(anime){ %>
-          <div class="col-md-3">
-            <div class="card" style="width: 18rem;">
+          <div class="col-md-4">
+            <div class="card" style="width: 21rem;">
               <img class="card-img-top" src="<%= anime.thumbnail %>" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title"><%= anime.title %></h5>
                 <p class="card-text"><%= anime.description %></p>
-                <a href="#" class="btn btn-primary">Places to stream</a>
+                <a href="/content/id/<%= anime._id %>" class="btn btn-primary">Places to stream</a>
               </div>
             </div>
             </div>

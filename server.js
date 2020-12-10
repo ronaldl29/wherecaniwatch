@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const app = express();
-const Video = require('./models/Video');
+const Video = require('./models/video');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -78,6 +78,21 @@ app.get('/content/animes', async (req, res) => {
   }
 });
 
+// @route    GET /content/:contentId
+// @desc     Get content by ID
+// @access   Public
+app.get('/content/id/:contentId', async (req, res) => {
+  try {
+    const content = await Video.findOne({
+      _id: req.params.contentId
+    }).populate("sources");
+
+    res.render("content", {title: content.title, content});
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 
 // @route    GET /create

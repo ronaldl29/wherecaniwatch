@@ -1,22 +1,19 @@
 <%- include('partials/header'); %>
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Top Movies</h1>
-      </div>
-      <div class="row">
-        <% movies.forEach(function(movie){ %>
-          <div class="col-md-4">
-            <div class="card" style="width: 21rem;">
-              <img class="card-img-top" src="<%= movie.thumbnail %>" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title"><%= movie.title %></h5>
-                <p class="card-text"><%= movie.description %></p>
-                <a href="/content/id/<%= movie._id %>" class="btn btn-primary">Places to stream</a>
-              </div>
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div style="width: 21rem;">
+                    <img class="card-img-top" src="<%= content.thumbnail %>" alt="Card image cap">
+                </div>
             </div>
+            <div class="col-md-8">
+            <h1 class="display-4"><%= content.title %></h1>
+            <hr>
+            <p><%= content.description %></p>
             </div>
-        <% }); %>
-      </div>
+        </div>
     </main>
   </div>
 </div>

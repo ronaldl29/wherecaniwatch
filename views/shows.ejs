@@ -5,13 +5,13 @@
       </div>
       <div class="row">
         <% shows.forEach(function(show){ %>
-          <div class="col-md-3">
-            <div class="card" style="width: 18rem;">
+          <div class="col-md-4">
+            <div class="card" style="width: 21rem;">
               <img class="card-img-top" src="<%= show.thumbnail %>" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title"><%= show.title %></h5>
                 <p class="card-text"><%= show.description %></p>
-                <a href="/video/<%= show._id %>" class="btn btn-primary"><span data-feather="info"></span> Places to stream</a>
+                <a href="/content/id/<%= show._id %>" class="btn btn-primary"><span data-feather="info"></span> Places to stream</a>
               </div>
             </div>
             </div>
