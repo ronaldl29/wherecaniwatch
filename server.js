@@ -125,6 +125,7 @@ app.post('/create', async (req, res) => {
       });
 
       video.save();
+      return res.redirect('/');
     } else {
       throw new Error('Incorrect password');
     }
