@@ -18,12 +18,9 @@ mongoose.connect("mongodb://localhost/wherecaniwatch", { useNewUrlParser: true, 
 // @access   Public
 app.get('/', async (req, res) => {
     try {
-      const movies = await Video.find({
-        category: "Movie"
-      }).populate("sources");
+      const contents = await Video.find().populate("sources");
 
-      console.log(movies)
-      res.render("index", {title: "Where Can I Watch", movies});
+      res.render("index", {title: "Where Can I Watch", contents});
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
