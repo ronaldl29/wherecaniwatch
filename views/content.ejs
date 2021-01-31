@@ -15,7 +15,7 @@
             <hr>
             <h2 class="display-4">Where Can I Watch <%= content.title %>?</h2>
             <% content.sources.forEach(function(source){ %>
-                <p><%= source.link %></p>
+                <a href="<%= source.link %>"><%= source.name %></p>
             <% }) %>
             </div>
         </div>
