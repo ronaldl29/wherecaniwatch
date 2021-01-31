@@ -13,8 +13,10 @@
             <hr>
             <p><%= content.description %></p>
             <hr>
-            <h1 class="display-4">Where Can I Watch <%= content.name %>?</h1>
-            <%= content.sources %>
+            <h2 class="display-4">Where Can I Watch <%= content.title %>?</h2>
+            <% content.sources.forEach(function(source){ %>
+                <p><%= source.link %></p>
+            <% }) %>
             </div>
         </div>
     </main>
