@@ -3,4 +3,4 @@
 
 A platform to help you find where to stream your favorite shows.
 
-![Screenshot]()
+![Screenshot](https://raw.githubusercontent.com/ronaldl29/wherecaniwatch/refs/heads/main/README-image.png)
