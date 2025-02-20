@@ -15,7 +15,11 @@
             <hr>
             <h2 class="display-4">Where Can I Watch <%= content.title %>?</h2>
             <% content.sources.forEach(function(source){ %>
-                <a href="<%= source.link %>"><%= source.name %></p>
+                <% if(source.name === 'Netflix'){ %>
+                    <button class="btn btn-danger" onclick="window.location.href='<%= source.link %>';"><img height=35 width=35 src="/icons/netflix.svg"> <%= source.name %></button>
+                <% } else { %>
+                    <a href="<%= source.link %>"><%= source.name %></p>
+                <% } %>
             <% }) %>
             </div>
         </div>

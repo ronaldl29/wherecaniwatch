@@ -8,19 +8,19 @@ const mongoose = require('mongoose');
 
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
-mongoose.connect("mongodb://localhost/wherecaniwatch", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost/wherecaniwatch');
 
 // @route    GET /
 // @desc     Get index page
 // @access   Public
 app.get('/', async (req, res) => {
     try {
-      const contents = await Video.find().populate("sources");
+      const shows = await Video.find().sort({'createdAt': -1}).populate('sources');
 
-      res.render("index", {title: "Where Can I Watch", contents});
+      res.render('index', {title: 'Where Can I Watch', shows});
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
@@ -32,11 +32,11 @@ app.get('/', async (req, res) => {
 // @access   Public
 app.get('/content/movies', async (req, res) => {
   try {
-    const movies = await Video.find({
-      category: "Movie"
-    }).populate("sources");
+    const shows = await Video.find({
+      category: 'Movie'
+    }).populate('sources');
 
-    res.render("movies", {title: "Where Can I Watch Movies", movies});
+    res.render('movies', {title: 'Where Can I Watch Movies', shows});
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -49,10 +49,10 @@ app.get('/content/movies', async (req, res) => {
 app.get('/content/shows', async (req, res) => {
   try {
     const shows = await Video.find({
-      category: "Show"
-    }).populate("sources");
+      category: 'Show'
+    }).populate('sources');
 
-    res.render("shows", {title: "Where Can I Watch Shows", shows});
+    res.render('shows', {title: 'Where Can I Watch Shows', shows});
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -62,13 +62,13 @@ app.get('/content/shows', async (req, res) => {
 // @route    GET /content/animes
 // @desc     Get animes
 // @access   Public
-app.get('/content/animes', async (req, res) => {
+app.get('/content/anime', async (req, res) => {
   try {
-    const animes = await Video.find({
-      category: "Anime"
-    }).populate("sources");
+    const shows = await Video.find({
+      category: 'Anime'
+    }).populate('sources');
 
-    res.render("animes", {title: "Where Can I Watch Anime", animes});
+    res.render('animes', {title: 'Where Can I Watch Anime', shows});
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -82,9 +82,9 @@ app.get('/content/id/:contentId', async (req, res) => {
   try {
     const content = await Video.findOne({
       _id: req.params.contentId
-    }).populate("sources");
+    }).populate('sources');
 
-    res.render("content", {title: content.title, content});
+    res.render('content', {title: content.title, content});
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -97,7 +97,7 @@ app.get('/content/id/:contentId', async (req, res) => {
 // @access   Public
 app.get('/create', async (req, res) => {
   try {
-      res.render("create", {title: "Create Video"});
+      res.render('create', {title: 'Create Video'});
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -132,6 +132,22 @@ app.post('/create', async (req, res) => {
   }
 });
 
+// @route    GET /search/:query
+// @desc     Get search results
+// @access   Public
+app.get('/search/:query', async (req, res) => {
+  try {
+    const searchTerm = req.params.query;
+        
+    // Use a case-insensitive regex search
+    const videos = await Video.find({ title: { $regex: searchTerm, $options: 'i' } });
+
+    res.render('search', {title: `Search Results for ${searchTerm}`, videos: videos});
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

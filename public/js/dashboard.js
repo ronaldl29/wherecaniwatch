@@ -1,3 +1,15 @@
+$(document).ready(function() {
+  $('.form-control').keypress(function(event) {
+      if (event.which === 13) { // Check if Enter key is pressed
+          event.preventDefault(); // Prevent default form submission (if inside a form)
+          var searchTerm = $(this).val().trim(); // Get input value
+          if (searchTerm) {
+              window.location.href = "/search/" + encodeURIComponent(searchTerm);
+          }
+      }
+  });
+});
+
 /* globals Chart:false, feather:false */
 
 (function () {

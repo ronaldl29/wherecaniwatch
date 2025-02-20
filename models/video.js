@@ -47,8 +47,12 @@ const videoSchema = new mongoose.Schema({
     },
     sources: [{
         type: sourceSchema
+    }],
+    genre: [{
+        type: String,
+        enum: ["Comedy", "Horror", "Action", "Drama"],
     }]
-});
+}, { timestamps: true });
 
 const videoModel = mongoose.model("Video", videoSchema);
 
