@@ -11,3 +11,10 @@ With all of the streaming services available nowadays, sometimes it can be diffi
 # Tech Stack
 This platform uses Node.js, MongoDB, and Express. For templating, it uses EJS. 
 
+# Pre-requisites
+- Node.js 22+
+- MongoDB 8+
+- Ubuntu 22+
+
+# Installation
+This platform can be ran on any server with the above pre-requisites installed. After the pre-requisites are installed, clone the repo. Then run `npm install` to install the server's dependencies. To add a movie, TV show or anime, visit <YOUR SERVER URL>/create.
