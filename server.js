@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
-mongoose.connect('mongodb://localhost/wherecaniwatch');
+mongoose.connect(process.env.DATABASE_URL);
 
 // @route    GET /
 // @desc     Get index page
